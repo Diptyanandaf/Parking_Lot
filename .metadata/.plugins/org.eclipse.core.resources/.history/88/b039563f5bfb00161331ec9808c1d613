@@ -1,0 +1,71 @@
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+public class Main {
+	/**
+	 * created by DIPTYANANDA FAKHRIANTO
+	 *  
+	 */
+	private static String[] carid;
+	private static String[] color;
+	
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		//System.out.println("Start Parking Lot System");
+		BufferedReader br = new BufferedReader(new FileReader("parking_lot file_inputs.txt"));
+		
+		try {
+	        String line = br.readLine();
+	        while (line != null) {
+	        	//System.out.println("baris : "+line);
+	        	String[] spline = null;
+	        	spline = line.split(" ");
+	        	//System.out.println("extract delimiter : "+spline[0]);
+	        	String command = spline[0];
+	        	//System.out.println("command : "+command);
+	        	
+	        	if (command.equals("create_parking_lot")) {
+	        		//System.out.println("Start Create Parking Lot");
+	        		Integer nlot = Integer.parseInt(spline[1]);
+	        		createLot(nlot);
+	        		createLot2(nlot);
+	        		System.out.println("Created a parking lot with "+nlot+" slots");
+	        	} else if (command.equals("park")) {
+	        		System.out.println("command : "+spline[0]);
+	        		System.out.println("carid : "+spline[1]);
+	        		System.out.println("color : "+spline[2]);
+	        	}
+	        	
+	            line = br.readLine();	            
+	        }
+		} finally {
+			br.close();
+		}
+	}
+
+	private static String[] createLot(Integer nlot) {
+		// TODO Auto-generated method stub
+		//System.out.println("nlot : "+nlot);
+		carid = new String[nlot];
+		for (int i=0; i<nlot; i++) {
+			carid[i] = "";
+		}
+		System.out.println("Created a parking lot with "+nlot+" slots");
+		return carid;
+	}
+	
+	private static String[] createLot2(Integer nlot) {
+		// TODO Auto-generated method stub
+		//System.out.println("nlot : "+nlot);
+		color = new String[nlot];
+		for (int i=0; i<nlot; i++) {
+			color[i] = "";
+		}
+		return color;
+	}
+	
+}

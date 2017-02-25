@@ -1,0 +1,56 @@
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+public class Main {
+	/**
+	 * created by DIPTYANANDA FAKHRIANTO
+	 *  
+	 */
+	private static String[] carid;
+	public ArrayList<Integer> color;
+	
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		System.out.println("Start Parking Lot System");
+		BufferedReader br = new BufferedReader(new FileReader("parking_lot file_inputs.txt"));
+		
+		try {
+	        String line = br.readLine();
+	        while (line != null) {
+	        	System.out.println("baris : "+line);
+	        	String[] spline = null;
+	        	spline = line.split(" ");
+	        	System.out.println("extract delimiter : "+spline[0]);
+	        	String command = spline[0];
+	        	System.out.println("command : "+command);
+	        	
+	        	if (command.equals("create_parking_lot")) {
+	        		System.out.println("Start Create Parking Lot");
+	        		String nlot = spline[1];
+	        		createLot(nlot);
+	        	} else if (command.equals("status")) {
+	        		System.out.println("222");
+	        	}
+	        	
+	            line = br.readLine();	            
+	        }
+		} finally {
+			br.close();
+		}
+	}
+
+	private static void createLot(String nlot) {
+		// TODO Auto-generated method stub
+		System.out.println("nlot : "+nlot);
+		Integer nlots = Integer.parseInt(nlot);
+		carid = new String[nlots];
+		for (int i=0; i<nlots; i++) {
+			carid[i] = "";
+			System.out.println("Parkiran "+(i+1)+" : "+carid[i]);
+		}
+	}
+}

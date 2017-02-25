@@ -1,0 +1,42 @@
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class Main {
+	/**
+	 * created by DIPTYANANDA FAKHRIANTO
+	 *  
+	 */
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		System.out.println("Start Parking Lot System");
+		readFileFirst();
+	}
+
+	private static String readFileFirst() throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new FileReader("parking_lot file_inputs.txt"));
+		StringBuilder sb = new StringBuilder();
+		String print = "";
+		String[] spline = null;
+		
+		try {
+	        String line = br.readLine();
+	        while (line != null) {
+	            sb.append(line);
+	            sb.append("\n");
+	            line = br.readLine();
+	            print = sb.toString();
+	            
+	            spline = print.split(" ");
+	            System.out.println(spline[0]);
+	        }
+		} finally {
+			br.close();
+		}
+		
+		System.out.println(print);
+		return "";
+	}
+}

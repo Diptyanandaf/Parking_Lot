@@ -1,0 +1,2 @@
+INDEX VERSION 1.125+D:\Diptyanandaf_Workspace\.metadata\.plugins\org.eclipse.jdt.core
+264917354.index

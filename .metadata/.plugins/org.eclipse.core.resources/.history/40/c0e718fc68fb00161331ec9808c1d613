@@ -1,0 +1,111 @@
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+public class Main {
+	/**
+	 * created by DIPTYANANDA FAKHRIANTO
+	 *  
+	 */
+	private static String[] carid;
+	private static String[] color;
+	private static ArrayList<String> regcolor;
+	
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new FileReader("parking_lot file_inputs.txt"));
+		
+		try {
+	        String line = br.readLine();
+	        Integer nlot = 0;
+	        while (line != null) {
+	        	String[] spline = null;
+	        	spline = line.split(" ");
+	        	String command = spline[0];
+	        	
+	        	if (command.equals("create_parking_lot")) {
+	        		nlot = Integer.parseInt(spline[1]);
+	        		createLot(nlot);
+	        		createLot2(nlot);
+	        		System.out.println("Created a parking lot with "+nlot+" slots");
+	        	} else if (command.equals("park")) {
+	        		int setlot = checkLot(nlot);
+	        		if (setlot < 0) {
+	        			System.out.println("Sorry, parking lot is full");
+	        		} else {
+	        			carid[setlot] = spline[1];
+	        			color[setlot] = spline[2];
+	        			System.out.println("Allocated slot number: "+(setlot+1));
+	        		}
+	        	} else if (command.equals("leave")) {
+	        		int leavelot = Integer.parseInt(spline[1]);
+	        		carid[leavelot-1] = "";
+	        		color[leavelot-1] = "";
+	        		System.out.println("Slot number "+leavelot+" is free");
+	        	} else if (command.equals("status")) {
+	        		System.out.println("No.	Registrasion Slot No.	Color");
+	        		for (int i=0; i<nlot; i++) {
+	        			if (!carid[i].isEmpty() && !color[i].isEmpty()) {
+	        				System.out.println((i+1)+"\t"+carid[i]+"\t\t"+color[i]);
+	        			}
+	        		}
+	        	} else if (command.equals("registration_numbers_for_cars_with_colour")) {
+	        		String colorreg = spline[1];
+	        		System.out.println("color reg : "+colorreg);
+	        		String regcolor_fix = colorReg(colorreg, nlot);
+	        		System.out.println("aaa "+regcolor_fix);
+	        	}
+	        	
+	            line = br.readLine();
+	        }
+		} finally {
+			br.close();
+		}
+	}
+
+	private static String[] createLot(Integer nlot) {
+		// TODO Auto-generated method stub
+		carid = new String[nlot];
+		for (int i=0; i<nlot; i++) {
+			carid[i] = "";
+		}
+		return carid;
+	}
+	
+	private static String[] createLot2(Integer nlot) {
+		// TODO Auto-generated method stub
+		color = new String[nlot];
+		for (int i=0; i<nlot; i++) {
+			color[i] = "";
+		}
+		return color;
+	}
+	
+	private static Integer checkLot(Integer nlot) {
+		// TODO Auto-generated method stub
+		int lotnum = -1;
+		for (int i=0; i<nlot; i++) {
+			if (carid[i].isEmpty() && color[i].isEmpty()) {
+				lotnum = i;
+				break;
+			}
+		}
+		return lotnum;
+	}
+	
+	private static String colorReg(String colorreg, Integer nlot) {
+		// TODO Auto-generated method stub
+		regcolor = new ArrayList<String>();
+		for (int i=0; i<nlot; i++) {
+			if (color[i].toUpperCase().equals(colorreg.toUpperCase())) {
+				regcolor.add(carid[i]);
+			}
+		}
+		String regcolor_str = String.valueOf(regcolor);
+		String regcolor_set = regcolor_str.replaceAll("[]", "");
+		return regcolor_set;
+	}
+}

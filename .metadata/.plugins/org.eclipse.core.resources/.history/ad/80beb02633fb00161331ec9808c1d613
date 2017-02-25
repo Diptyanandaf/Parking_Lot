@@ -1,0 +1,31 @@
+
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("Hello World!");
+		
+		String test="";
+		
+		test=createOutput(1);
+		
+		System.out.println(test);
+	}
+
+	private static String createOutput(int i) {
+		// TODO Auto-generated method stub
+		String res="";
+		
+		if (i==1) {
+			res = "satu";
+		} else if (i==2) {
+			res = "dua";
+		}
+		
+		return res;
+	}
+
+}

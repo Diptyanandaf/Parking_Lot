@@ -1,0 +1,82 @@
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+public class Main {
+	/**
+	 * created by DIPTYANANDA FAKHRIANTO
+	 *  
+	 */
+	private static String[] carid;
+	private static String[] color;
+	
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new FileReader("parking_lot file_inputs.txt"));
+		
+		try {
+	        String line = br.readLine();
+	        Integer nlot = 0;
+	        while (line != null) {
+	        	String[] spline = null;
+	        	spline = line.split(" ");
+	        	String command = spline[0];
+	        	
+	        	if (command.equals("create_parking_lot")) {
+	        		nlot = Integer.parseInt(spline[1]);
+	        		createLot(nlot);
+	        		createLot2(nlot);
+	        		System.out.println("Created a parking lot with "+nlot+" slots");
+	        	} else if (command.equals("park")) {
+	        		int setlot = checkLot(nlot);
+	        		carid[setlot] = spline[1];
+	        		color[setlot] = spline[2];
+	        		System.out.println("Allocated slot number: "+(setlot+1));
+	        	} else if (command.equals("leave")) {
+	        		int leavelot = Integer.parseInt(spline[1]);
+	        		System.out.println(leavelot);
+	        	}
+	        	
+	            line = br.readLine();	            
+	        }
+		} finally {
+			br.close();
+		}
+	}
+
+	private static String[] createLot(Integer nlot) {
+		// TODO Auto-generated method stub
+		carid = new String[nlot];
+		for (int i=0; i<nlot; i++) {
+			carid[i] = "";
+		}
+		return carid;
+	}
+	
+	private static String[] createLot2(Integer nlot) {
+		// TODO Auto-generated method stub
+		color = new String[nlot];
+		for (int i=0; i<nlot; i++) {
+			color[i] = "";
+		}
+		return color;
+	}
+	
+	private static Integer checkLot(Integer nlot) {
+		// TODO Auto-generated method stub
+		int lotnum = -1;
+		//System.out.println("nlot : "+nlot);
+		for (int i=0; i<nlot; i++) {
+			//System.out.println("slot kosong : "+carid[i]);
+			if (carid[i].isEmpty()) {
+				lotnum = i;
+				break;
+			}
+		}
+		//System.out.println("lot available : "+lotnum);
+		return lotnum;
+	}
+}
