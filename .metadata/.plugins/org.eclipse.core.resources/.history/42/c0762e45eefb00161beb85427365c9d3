@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Main {
@@ -49,18 +51,10 @@ public class Main {
 	        			
 	        		}
 	        	} else if (command.equals("leave")) {
-	        		if (carid == null && color == null) {
-	        			System.out.println("Parking lot not created");
-	        		} else {
-	        			int leavelot = Integer.parseInt(spline[1]);
-	        			if (carid[leavelot-1] == "" && color[leavelot-1] == "") {
-	        				System.out.println("Slot number "+leavelot+" is already free");
-	        			} else {
-	        				carid[leavelot-1] = "";
-	        				color[leavelot-1] = "";
-	        				System.out.println("Slot number "+leavelot+" is free");
-	        			}
-	        		}
+	        		int leavelot = Integer.parseInt(spline[1]);
+	        		carid[leavelot-1] = "";
+	        		color[leavelot-1] = "";
+	        		System.out.println("Slot number "+leavelot+" is free");
 	        	} else if (command.equals("status")) {
 	        		if (carid == null && color == null) {
 	        			System.out.println("Parking lot not created");

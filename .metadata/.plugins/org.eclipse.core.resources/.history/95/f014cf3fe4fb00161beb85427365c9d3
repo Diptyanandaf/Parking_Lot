@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Main {
@@ -15,61 +17,41 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		BufferedReader br = new BufferedReader(new FileReader("parking_lot file_inputs.txt"));
+		
 		try {
 	        String line = br.readLine();
 	        Integer nlot = 0;
-	        carid = null;
-	        color = null;
 	        while (line != null) {
 	        	String[] spline = null;
 	        	spline = line.split(" ");
 	        	String command = spline[0];
+	        	
 	        	if (command.equals("create_parking_lot")) {
-	        		if (carid == null && color == null) {
-	        			nlot = Integer.parseInt(spline[1]);
-		        		carid = createLot(nlot);
-		        		color = createLot(nlot);
-		        		System.out.println("Created a parking lot with "+nlot+" slots");
-	        		} else {
-	        			System.out.println("Parking lot already created");
-	        		}
+	        		nlot = Integer.parseInt(spline[1]);
+	        		System.out.println(carid.length+" "+color.length);
+	        		createLot(nlot);
+	        		createLot2(nlot);
+	        		System.out.println(carid.length+" "+color.length);
+	        		System.out.println("Created a parking lot with "+nlot+" slots");
 	        	} else if (command.equals("park")) {
-	        		if (carid == null && color == null) {
-	        			System.out.println("Parking lot not created");
+	        		int setlot = checkLot(nlot);
+	        		if (setlot < 0) {
+	        			System.out.println("Sorry, parking lot is full");
 	        		} else {
-	        		
-	        			int setlot = checkLot(nlot);
-	        			if (setlot < 0) {
-	        				System.out.println("Sorry, parking lot is full");
-	        			} else {
-	        				carid[setlot] = spline[1];
-	        				color[setlot] = spline[2];
-	        				System.out.println("Allocated slot number: "+(setlot+1));
-	        			}
-	        			
+	        			carid[setlot] = spline[1];
+	        			color[setlot] = spline[2];
+	        			System.out.println("Allocated slot number: "+(setlot+1));
 	        		}
 	        	} else if (command.equals("leave")) {
-	        		if (carid == null && color == null) {
-	        			System.out.println("Parking lot not created");
-	        		} else {
-	        			int leavelot = Integer.parseInt(spline[1]);
-	        			if (carid[leavelot-1] == "" && color[leavelot-1] == "") {
-	        				System.out.println("Slot number "+leavelot+" is already free");
-	        			} else {
-	        				carid[leavelot-1] = "";
-	        				color[leavelot-1] = "";
-	        				System.out.println("Slot number "+leavelot+" is free");
-	        			}
-	        		}
+	        		int leavelot = Integer.parseInt(spline[1]);
+	        		carid[leavelot-1] = "";
+	        		color[leavelot-1] = "";
+	        		System.out.println("Slot number "+leavelot+" is free");
 	        	} else if (command.equals("status")) {
-	        		if (carid == null && color == null) {
-	        			System.out.println("Parking lot not created");
-	        		} else {
-	        			System.out.println("No.	Registrasion Slot No.	Color");
-	        			for (int i=0; i<nlot; i++) {
-	        				if (!carid[i].isEmpty() && !color[i].isEmpty()) {
-	        					System.out.println((i+1)+"\t"+carid[i]+"\t\t"+color[i]);
-	        				}
+	        		System.out.println("No.	Registrasion Slot No.	Color");
+	        		for (int i=0; i<nlot; i++) {
+	        			if (!carid[i].isEmpty() && !color[i].isEmpty()) {
+	        				System.out.println((i+1)+"\t"+carid[i]+"\t\t"+color[i]);
 	        			}
 	        		}
 	        	} else if (command.equals("registration_numbers_for_cars_with_colour")) {
@@ -97,6 +79,7 @@ public class Main {
 	        			System.out.println("Not found");
 	        		}
 	        	}
+	        	
 	            line = br.readLine();
 	        }
 		} finally {
@@ -106,12 +89,20 @@ public class Main {
 
 	private static String[] createLot(Integer nlot) {
 		// TODO Auto-generated method stub
-		String[] arraylot;
-		arraylot = new String[nlot];
+		carid = new String[nlot];
 		for (int i=0; i<nlot; i++) {
-			arraylot[i] = "";
+			carid[i] = "";
 		}
-		return arraylot;
+		return carid;
+	}
+	
+	private static String[] createLot2(Integer nlot) {
+		// TODO Auto-generated method stub
+		color = new String[nlot];
+		for (int i=0; i<nlot; i++) {
+			color[i] = "";
+		}
+		return color;
 	}
 	
 	private static Integer checkLot(Integer nlot) {
