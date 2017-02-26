@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="NewWizardAction">
+		<item value="org.eclipse.jdt.ui.wizards.JavaProjectWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="org.eclipse.team.cvs.ui.newWizards"/>
+			<item value="org.eclipse.wst.rdb"/>
+			<item value="org.eclipse.jst.ejb.ui"/>
+			<item value="org.eclipse.gmf.tooling.wizardCategory"/>
+			<item value="org.eclipse.jdt.ui.java"/>
+			<item value="org.eclipse.jst.j2ee.internal"/>
+			<item value="org.eclipse.wst.jsdt.ui.java"/>
+			<item value="org.eclipse.jet.wizards"/>
+			<item value="org.eclipse.jpt"/>
+			<item value="com.ibm.ws.ast.jythontools.ui.category"/>
+			<item value="org.eclipse.gmf.runtime.emf.ui.modeling"/>
+			<item value="org.eclipse.pde.PDE"/>
+			<item value="com.ibm.SIP"/>
+			<item value="com.ibm.team.foundation.rcp.ui"/>
+			<item value="org.eclipse.wst.web.ui"/>
+			<item value="org.eclipse.ui.Other"/>
+			<item value="org.eclipse.ui.Examples"/>
+			<item value="org.eclipse.ui.Examples/org.eclipse.hyades.logging.samples"/>
+			<item value="org.eclipse.ui.Examples/org.eclipse.wst.xml.examples"/>
+		</list>
+	</section>
+	<section name="CleanDialogSettings">
+		<item value="135" key="DIALOG_Y_ORIGIN"/>
+		<item value="475" key="DIALOG_X_ORIGIN"/>
+		<item value="false" key="TOGGLE_SELECTED"/>
+		<item value="353" key="DIALOG_HEIGHT"/>
+		<item value="411" key="DIALOG_WIDTH"/>
+	</section>
+	<section name="SaveAsDialogSettings">
+		<item value="-52" key="DIALOG_Y_ORIGIN"/>
+		<item value="1|Tahoma|8.25|0|WINDOWS|1|-11|0|0|0|400|0|0|0|1|0|0|0|0|Tahoma" key="DIALOG_FONT_NAME"/>
+		<item value="57" key="DIALOG_X_ORIGIN"/>
+		<item value="552" key="DIALOG_HEIGHT"/>
+		<item value="438" key="DIALOG_WIDTH"/>
+	</section>
+</section>

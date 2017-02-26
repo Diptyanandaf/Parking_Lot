@@ -54,8 +54,28 @@ public class Main {
 	        		}
 	        	} else if (command.equals("registration_numbers_for_cars_with_colour")) {
 	        		String colorreg = spline[1];
-	        		String regcolor_fix = colorReg(colorreg, nlot);
-	        		System.out.println(regcolor_fix);
+	        		String regcolor_fix = colorReg(1, colorreg, nlot);
+	        		if (!regcolor_fix.equals("")) {
+	        			System.out.println(regcolor_fix);
+	        		} else {
+	        			System.out.println("Not found");
+	        		}
+	        	} else if (command.equals("slot_numbers_for_cars_with_colour")) {
+	        		String colorslot = spline[1];
+	        		String regcolor_fix = colorReg(2, colorslot, nlot);
+	        		if (!regcolor_fix.equals("")) {
+	        			System.out.println(regcolor_fix);
+	        		} else {
+	        			System.out.println("Not found");
+	        		}
+	        	} else if (command.equals("slot_number_for_registration_number")) {
+	        		String numberslot = spline[1];
+	        		String slotnumber = numberSlot(numberslot, nlot);
+	        		if (!slotnumber.equals("")) {
+	        			System.out.println(slotnumber);
+	        		} else {
+	        			System.out.println("Not found");
+	        		}
 	        	}
 	        	
 	            line = br.readLine();
@@ -95,16 +115,37 @@ public class Main {
 		return lotnum;
 	}
 	
-	private static String colorReg(String colorreg, Integer nlot) {
+	private static String colorReg(Integer param, String colorreg, Integer nlot) {
 		// TODO Auto-generated method stub
 		regcolor = new ArrayList<String>();
+		String regcolor_str;
+		if (param == 1) {
+			for (int i=0; i<nlot; i++) {
+				if (color[i].toUpperCase().equals(colorreg.toUpperCase())) {
+					regcolor.add(carid[i]);
+				}
+			}
+			regcolor_str = String.valueOf(regcolor);
+		} else {
+			for (int i=0; i<nlot; i++) {
+				if (color[i].toUpperCase().equals(colorreg.toUpperCase())) {
+					regcolor.add(String.valueOf(i+1));
+				}
+			}
+			regcolor_str = String.valueOf(regcolor);
+		}
+		String regcolor_set = regcolor_str.replaceAll("[^\\w\\s\\,-]", "");	
+		return regcolor_set;
+	}
+	
+	private static String numberSlot(String numberslot, Integer nlot) {
+		// TODO Auto-generated method stub
+		String slotnumber_set = "";
 		for (int i=0; i<nlot; i++) {
-			if (color[i].toUpperCase().equals(colorreg.toUpperCase())) {
-				regcolor.add(carid[i]);
+			if (carid[i].equals(numberslot)) {
+				slotnumber_set = String.valueOf(i+1);
 			}
 		}
-		String regcolor_str = String.valueOf(regcolor);
-		String regcolor_set = regcolor_str.replaceAll("[^\\w\\s\\,]", "");
-		return regcolor_set;
+		return slotnumber_set;
 	}
 }
